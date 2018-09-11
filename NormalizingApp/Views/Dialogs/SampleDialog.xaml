@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="NormalizingApp.Views.Dialogs.SampleDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:materialDesignDemo="clr-namespace:NormalizingApp"
+             xmlns:dialogs="clr-namespace:NormalizingApp.Views.Dialogs"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Margin="16">
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock>新建用户</TextBlock>
+        <TextBox wpf:HintAssist.Hint="用户名" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
+                 Margin="0 6 0 0"
+                 FontSize="18" Grid.Row="1">
+            <TextBox.Text>
+                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                    
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox wpf:HintAssist.Hint="密码" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                 Margin="0 6 0 0"
+                 FontSize="18" Grid.Row="2"
+                 />
+        <StackPanel Orientation="Horizontal" Grid.Row="3"
+                    Margin="0 16 0 0">
+            <Button IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{x:Static wpf:DialogHost.CloseDialogCommand}">
+                <Button.CommandParameter>
+                    <system:Boolean>True</system:Boolean>
+                </Button.CommandParameter>
+                确定
+            </Button>
+            <Button IsCancel="True" Margin="8 0 0 0" Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{x:Static wpf:DialogHost.CloseDialogCommand}">
+                <Button.CommandParameter>
+                    <system:Boolean>False</system:Boolean>
+                </Button.CommandParameter>
+                取消
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

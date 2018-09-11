@@ -1,0 +1,424 @@
+﻿<UserControl x:Class="NormalizingApp.Views.UIControls.HomePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NormalizingApp.Views.UIControls"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1280"
+             xmlns:gauge="clr-namespace:CircularGauge;assembly=CircularGauge"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto">
+    <DockPanel>
+        <Grid DockPanel.Dock="top">
+            <!--划分为两栏-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <wpf:Card DockPanel.Dock="Top" Grid.Row="0">
+                <!--坐标显示栏-->
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Grid.Row="0"  BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0" >
+                        <Label Content="轴名称" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="0"  BorderBrush="Black" BorderThickness="0,1,1,1" CornerRadius="0" >
+                        <Label Content="实际位置(mm)" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="0"  BorderBrush="Black" BorderThickness="0,1,1,1" CornerRadius="0" >
+                        <Label Content="实际速度(mm/m)" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="3" Grid.Row="0"  BorderBrush="Black" BorderThickness="0,1,1,1" CornerRadius="0" >
+                        <Label Content="目标位置(mm)" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="4" Grid.Row="0"  BorderBrush="Black" BorderThickness="0,1,1,1" CornerRadius="0" >
+                        <Label Content="目标速度(mm/m)" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="5" Grid.Row="0"  BorderBrush="Black" BorderThickness="0,1,1,1" CornerRadius="0" >
+                        <Label Content="实际电流(A)" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="0" Grid.Row="1"  BorderBrush="Black" BorderThickness="1,0,1,1" CornerRadius="0" >
+                        <Label Content="X轴" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="0" Grid.Row="2"  BorderBrush="Black" BorderThickness="1,0,1,1" CornerRadius="0" >
+                        <Label Content="Y轴" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="0" Grid.Row="3"  BorderBrush="Black" BorderThickness="1,0,1,1" CornerRadius="0" >
+                        <Label Content="Z轴" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <!--X轴数据显示-->
+                    <Border Grid.Column="1" Grid.Row="1"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="xActPosTbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" />
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="1"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="xActSpeedTbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <Border Grid.Column="3" Grid.Row="1"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="xSetPosTbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <Border Grid.Column="4" Grid.Row="1"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="xSetSpeedTbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <Border Grid.Column="5" Grid.Row="1"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="xActCurrentTbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <!--Y轴数据显示-->
+                    <Border Grid.Column="1" Grid.Row="2"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="yActPosTbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="2"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="yActSpeedTbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <Border Grid.Column="3" Grid.Row="2"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="ySetPosTbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <Border Grid.Column="4" Grid.Row="2"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="ySetSpeedTbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <Border Grid.Column="5" Grid.Row="2"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="yActCurrentTbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <!--Z轴数据显示-->
+                    <Border Grid.Column="1" Grid.Row="3"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="zActPosTbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="3"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="zActSpeedTbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <Border Grid.Column="3" Grid.Row="3"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="zSetPosTbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <Border Grid.Column="4" Grid.Row="3"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="zSetSpeedTbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <Border Grid.Column="5" Grid.Row="3"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="zActCurrentTbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                </Grid>
+            </wpf:Card>
+
+
+
+            <wpf:Card Grid.Row="2">
+                <!--其他参数显示栏-->
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Row="0" Grid.ColumnSpan="6"  Background="{DynamicResource PrimaryHueLightBrush}">
+                        <Label Content="设备传感器数据" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="0" Grid.Row="1"  BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="0" >
+                        <Label Content="温度传感器" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="0" Grid.Row="2"  BorderBrush="Black" BorderThickness="1,0,1,1" CornerRadius="0" >
+                        <Label Content="1#温度" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="0" Grid.Row="3"  BorderBrush="Black" BorderThickness="1,0,1,1" CornerRadius="0" >
+                        <Label Content="2#温度" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="0" Grid.Row="4"  BorderBrush="Black" BorderThickness="1,0,1,1" CornerRadius="0" >
+                        <Label Content="3#温度" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="1"  BorderBrush="Black" BorderThickness="0,1,1,1" CornerRadius="0" >
+                        <Label Content="实际温度(℃)" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="1"  BorderBrush="Black" BorderThickness="0,1,1,1" CornerRadius="0" >
+                        <Label Content="流量传感器" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="3" Grid.Row="1"  BorderBrush="Black" BorderThickness="0,1,1,1" CornerRadius="0" >
+                        <Label Content="实际流量(L/min)" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" />
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="2"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <Label Content="1#流量" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="3"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <Label Content="2#流量" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="4"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <Label Content="3#流量" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="2"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="actTemp1Tbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="3"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="actTemp2Tbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="4"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="actTemp3Tbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <Border Grid.Column="3" Grid.Row="2"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="actFlow1Tbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <Border Grid.Column="3" Grid.Row="3"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="actFlow2Tbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <Border Grid.Column="3" Grid.Row="4"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="actFlow3Tbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <!--位移跟踪-->
+                    <Border Grid.Column="4" Grid.Row="1"  BorderBrush="Black" BorderThickness="0,1,1,1" CornerRadius="0" >
+                        <Label Content="位移传感器" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="4" Grid.Row="2"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <Label Content="Y轴跟踪" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <!--4#备用温度-->
+                    <Border Grid.Column="4" Grid.Row="3"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <Label Content="Z轴跟踪" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="4" Grid.Row="4"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <Label Content="喷风压力" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <!--Y轴位置传感器-->
+                    <Border Grid.Column="5" Grid.Row="1"  BorderBrush="Black" BorderThickness="0,1,1,1" CornerRadius="0" >
+                        <Label Content="跟踪器实际位置(mm)" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+                    <Border Grid.Column="5" Grid.Row="2"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="actLenght1Tbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <!--Z轴位置传感器-->
+                    <Border Grid.Column="5" Grid.Row="3"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="actLenght2Tbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+                    <Border Grid.Column="5" Grid.Row="4"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                        <TextBlock x:Name="actPressureTbk" Text="{Binding Path=DataText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                    </Border>
+
+                </Grid>
+            </wpf:Card>
+
+
+            <wpf:Card Grid.Row="4">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Row="0" Grid.ColumnSpan="8" Background="{DynamicResource PrimaryHueLightBrush}">
+                        <Label Content="设备状态指示" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   />
+                    </Border>
+
+                    <Label Content="IGBT电源状态" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Padding="2"/>
+                    <Ellipse x:Name="A" Grid.Row="2" Grid.Column="0" Height="40" Width="40" Margin="5" Fill="Red" />
+
+                    <Label Content="Y轴跟踪到位" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Padding="2"/>
+                    <Ellipse x:Name="B" Grid.Row="2" Grid.Column="1" Height="40" Width="40" Margin="2" Fill="Red" />
+
+                    <Label Content="Z轴跟踪到位" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Padding="2"/>
+                    <Ellipse x:Name="C" Grid.Row="2" Grid.Column="2" Height="40" Width="40" Margin="2" Fill="Red" />
+
+                    <Label Content="设备故障" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Padding="2"/>
+                    <Ellipse x:Name="D" Grid.Row="2" Grid.Column="3" Height="40" Width="40" Margin="2" Fill="Red" />
+
+                    <Label Content="允许加工" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Padding="2"/>
+                    <Ellipse x:Name="E" Grid.Row="2" Grid.Column="4" Height="40" Width="40" Margin="2" Fill="Red" />
+
+                    <Label Content="送料完成" Grid.Row="1" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Padding="2"/>
+                    <Ellipse x:Name="F" Grid.Row="2" Grid.Column="5" Height="40" Width="40" Margin="2" Fill="Red" />
+
+                    <Label Content="备用" Grid.Row="1" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Padding="2"/>
+                    <Ellipse x:Name="G" Grid.Row="2" Grid.Column="6" Height="40" Width="40" Margin="2" Fill="Red" />
+
+                    <Label Content="备用" Grid.Row="1" Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Padding="2"/>
+                    <Ellipse x:Name="H" Grid.Row="2" Grid.Column="7" Height="40" Width="40" Margin="2" Fill="Red" />
+                </Grid>
+            </wpf:Card>
+
+        </Grid>
+        <Grid DockPanel.Dock="Bottom" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <gauge:CircularGaugeControl x:Name="TGauge1" Grid.Column="0" 
+                		    Radius="120" 
+                		    ScaleRadius="66" 
+                		    ScaleStartAngle="120" 
+                		    ScaleSweepAngle="300"
+                		    PointerLength="60" 
+                		    PointerCapRadius="30" 
+                		    MinValue="0" 
+                		    MaxValue="600" 
+                		    MajorDivisionsCount="10" 
+                		    MinorDivisionsCount="5" 
+                		    CurrentValue="{Binding Path=Score,Mode=TwoWay}"
+                		    ImageSource="/Resources/windowsLogo.png"
+                		    ImageSize="30,40"
+                		    RangeIndicatorThickness="10"
+                		    RangeIndicatorRadius="95"
+                		    RangeIndicatorLightRadius="8"
+                		    RangeIndicatorLightOffset="60"
+                		    ScaleLabelRadius="83"
+                		    ScaleLabelSize="40,20"
+                		    ScaleLabelFontSize="10"
+                		    ScaleLabelForeground="LightGray"
+                		    MajorTickSize="10,3"
+                		    MinorTickSize="3,1"
+                		    MajorTickColor="LightGray"
+                		    MinorTickColor="LightGray"
+                		    ImageOffset="-38"
+                		    GaugeBackgroundColor="Black" 
+                		    PointerThickness ="13"
+                		    OptimalRangeStartValue="200"
+                		    OptimalRangeEndValue="480" 
+                		    DialTextOffset="88" 
+                		    DialText="{Binding Path=Score, StringFormat=电压 {0:000} V}"
+                		    DialTextColor="White"  Margin="20,2,20,2" Width="240" Height="240"
+                                            />
+            <gauge:CircularGaugeControl x:Name="TGauge2" Grid.Column="1" 
+                		    Radius="120" 
+                		    ScaleRadius="66" 
+                		    ScaleStartAngle="120" 
+                		    ScaleSweepAngle="300"
+                		    PointerLength="60" 
+                		    PointerCapRadius="30" 
+                		    MinValue="0" 
+                		    MaxValue="500" 
+                		    MajorDivisionsCount="10" 
+                		    MinorDivisionsCount="5" 
+                		    CurrentValue="{Binding Path=Score,Mode=TwoWay}"
+                		    ImageSource="/Resources/windowsLogo.png"
+                		    ImageSize="30,40"
+                		    RangeIndicatorThickness="10"
+                		    RangeIndicatorRadius="95"
+                		    RangeIndicatorLightRadius="8"
+                		    RangeIndicatorLightOffset="60"
+                		    ScaleLabelRadius="83"
+                		    ScaleLabelSize="40,20"
+                		    ScaleLabelFontSize="10"
+                		    ScaleLabelForeground="LightGray"
+                		    MajorTickSize="10,3"
+                		    MinorTickSize="3,1"
+                		    MajorTickColor="LightGray"
+                		    MinorTickColor="LightGray"
+                		    ImageOffset="-38"
+                		    GaugeBackgroundColor="Black" 
+                		    PointerThickness ="13"
+                		    OptimalRangeStartValue="200"
+                		    OptimalRangeEndValue="300" 
+                		    DialTextOffset="88" 
+                		    DialText="{Binding Path=Score, StringFormat=电流 {0:000} A}"
+                		    DialTextColor="White"  Margin="20,2,20,2" Width="240" Height="240"
+                                            />
+            <gauge:CircularGaugeControl x:Name="TGauge3" Grid.Column="2" 
+                		    Radius="120" 
+                		    ScaleRadius="66" 
+                		    ScaleStartAngle="120" 
+                		    ScaleSweepAngle="300"
+                		    PointerLength="60" 
+                		    PointerCapRadius="30" 
+                		    MinValue="0" 
+                		    MaxValue="250" 
+                		    MajorDivisionsCount="10" 
+                		    MinorDivisionsCount="5" 
+                		    CurrentValue="{Binding Path=Score,Mode=TwoWay}"
+                		    ImageSource="/Resources/windowsLogo.png"
+                		    ImageSize="30,40"
+                		    RangeIndicatorThickness="10"
+                		    RangeIndicatorRadius="95"
+                		    RangeIndicatorLightRadius="8"
+                		    RangeIndicatorLightOffset="60"
+                		    ScaleLabelRadius="83"
+                		    ScaleLabelSize="40,20"
+                		    ScaleLabelFontSize="10"
+                		    ScaleLabelForeground="LightGray"
+                		    MajorTickSize="10,3"
+                		    MinorTickSize="3,1"
+                		    MajorTickColor="LightGray"
+                		    MinorTickColor="LightGray"
+                		    ImageOffset="-38"
+                		    GaugeBackgroundColor="Black" 
+                		    PointerThickness ="13"
+                		    OptimalRangeStartValue="100"
+                		    OptimalRangeEndValue="150" 
+                		    DialTextOffset="88" 
+                		    DialText="{Binding Path=Score, StringFormat=功率 {0:000} KW}"
+                		    DialTextColor="White"  Margin="20,2,20,2" Width="240" Height="240"
+                                            />
+            <gauge:CircularGaugeControl x:Name="TGauge4" Grid.Column="3" 
+                		    Radius="120" 
+                		    ScaleRadius="66" 
+                		    ScaleStartAngle="120" 
+                		    ScaleSweepAngle="300"
+                		    PointerLength="60" 
+                		    PointerCapRadius="30" 
+                		    MinValue="0" 
+                		    MaxValue="2000" 
+                		    MajorDivisionsCount="10" 
+                		    MinorDivisionsCount="5" 
+                		    CurrentValue="{Binding Path=Score,Mode=TwoWay}"
+                		    ImageSource="/Resources/windowsLogo.png"
+                		    ImageSize="30,40"
+                		    RangeIndicatorThickness="10"
+                		    RangeIndicatorRadius="95"
+                		    RangeIndicatorLightRadius="8"
+                		    RangeIndicatorLightOffset="60"
+                		    ScaleLabelRadius="83"
+                		    ScaleLabelSize="40,20"
+                		    ScaleLabelFontSize="10"
+                		    ScaleLabelForeground="LightGray"
+                		    MajorTickSize="10,3"
+                		    MinorTickSize="3,1"
+                		    MajorTickColor="LightGray"
+                		    MinorTickColor="LightGray"
+                		    ImageOffset="-38"
+                		    GaugeBackgroundColor="Black" 
+                		    PointerThickness ="13"
+                		    OptimalRangeStartValue="200"
+                		    OptimalRangeEndValue="1000" 
+                		    DialTextOffset="88" 
+                		    DialText="{Binding Path=Score, StringFormat=能量 {0:000} KWS}"
+                		    DialTextColor="White"  Margin="20,2,20,2" Width="240" Height="240"
+                                            />
+        </Grid>
+
+
+    </DockPanel>
+</UserControl>

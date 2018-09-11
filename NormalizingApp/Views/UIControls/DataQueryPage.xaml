@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="NormalizingApp.Views.UIControls.DataQueryPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+             xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1280"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DatePicker.xaml" />
+               
+                
+                
+                
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="数据查询" Margin="0,1,2,0" FontSize="18">
+            <DockPanel x:Name="DockPanel_Data" Grid.Column="0" Width="230">
+                <DatePicker x:Name="datePickerCtrl" Margin="0,10,0,0" materialDesign:HintAssist.Hint="选择日期" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" FontSize="20" DockPanel.Dock="Top" SelectedDateChanged="DatePicker_SelectedDateChanged" />
+                <ListView x:Name="partNumberlBx" SelectedIndex="0" FontSize="20" SelectionChanged="partNumberlBx_SelectionChanged">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="焊缝编号"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </DockPanel>
+        </GroupBox>
+
+        <dragablz:TabablzControl Grid.Column="1"  Margin="0,1,0,0"  FontWeight="Bold" FontSize="18">
+            
+
+            <TabItem  Header="曲线视图">
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--曲线数据选择按钮-->
+                    <WrapPanel Grid.Row="0" Orientation="Horizontal" ItemHeight="80" ItemWidth="120" HorizontalAlignment="Center">
+                        <Button  Tag="A" Content="电压" Height="50" Margin="10" FontSize="15" Click="button_Click" Style="{StaticResource MaterialDesignRaisedButton}"/>
+                        <Button  Tag="B" Content="电流" Height="50" Margin="10" FontSize="15" Click="button_Click" Style="{StaticResource MaterialDesignRaisedButton}"/>
+                        <Button  Tag="C" Content="功率" Height="50" Margin="10" FontSize="15" Click="button_Click" Style="{StaticResource MaterialDesignRaisedButton}"/>
+                        <Button  Tag="D" Content="能量" Height="50" Margin="10" FontSize="15" Click="button_Click" Style="{StaticResource MaterialDesignRaisedButton}"/>
+                        <Button  Tag="E" Content="加热温度" Height="50" Margin="10" FontSize="15" Click="button_Click" Style="{StaticResource MaterialDesignRaisedButton}"/>
+                        <Button  Tag="F" Content="冷却温度" Height="50" Margin="10" FontSize="15" Click="button_Click" Style="{StaticResource MaterialDesignRaisedButton}"/>
+                        <Button  Tag="G" Content="流量" Height="50" Margin="10" FontSize="15" Click="button_Click" Style="{StaticResource MaterialDesignRaisedButton}"/>
+                        <Button  Tag="H" Content="压力" Height="50" Margin="10" FontSize="15" Click="button_Click" Style="{StaticResource MaterialDesignRaisedButton}"/>
+                    </WrapPanel>
+                    <!--曲线控件-->
+                    <GroupBox x:Name="GroupBox_Data" Header="{Binding ElementName=partNumberlBx,Path=SelectedItem}" FontSize="20" Grid.Row="1">
+                        <d3:ChartPlotter x:Name="plotter1" Background="Transparent" TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+                             TextOptions.TextFormattingMode="Ideal"
+                             TextOptions.TextRenderingMode="Auto">
+                            <!--<d3:Header Content="温度实时曲线(℃)" FontWeight="Bold" FontSize="15"/>-->
+                            <!--<d3:VerticalAxisTitle Content="{Binding Path = DataText, Mode=TwoWay}"/>-->
+                            <d3:HorizontalAxisTitle Content="时间(s)"/>
+                        </d3:ChartPlotter>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="数据视图" >
+                <DataGrid x:Name="DataGrid1">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding serialNumber}" Header="焊缝编号" FontSize="15"/>
+                        <DataGridTextColumn Binding="{Binding operatorName}" Header="操作员" FontSize="15"/>
+                        <DataGridTextColumn Binding="{Binding heatTime}" Header="加热时间(s)" FontSize="15"/>
+                        <DataGridTextColumn Binding="{Binding voltage}" Header="电压(V)" FontSize="15"/>
+                        <DataGridTextColumn Binding="{Binding current}" Header="电流(A)" FontSize="15"/>
+                        <DataGridTextColumn Binding="{Binding power}" Header="功率(Kw)" FontSize="15"/>
+                        <DataGridTextColumn Binding="{Binding frequency}" Header="频率(Khz)" FontSize="15"/>
+                        <DataGridTextColumn Binding="{Binding energy}" Header="能量(Kws)" FontSize="15"/>
+                        <DataGridTextColumn Binding="{Binding temperature1}" Header="轨顶温度(℃)" FontSize="15"/>
+                        <DataGridTextColumn Binding="{Binding temperature2}" Header="轨脚边温度(℃)" FontSize="15"/>
+                        <DataGridTextColumn Binding="{Binding temperature3}" Header="内轨脚温度(℃)" FontSize="15"/>
+                        <DataGridTextColumn Binding="{Binding coolingTime}" Header="冷却时间(s)" FontSize="15"/>
+                        <DataGridTextColumn Binding="{Binding temperature4}" Header="冷却温度(℃)" FontSize="15"/>
+                        <DataGridTextColumn Binding="{Binding flow1}" Header="轨顶流量(L/min)" FontSize="15"/>
+                        <DataGridTextColumn Binding="{Binding flow2}" Header="轨脚边流量(L/min)" FontSize="15"/>
+                        <DataGridTextColumn Binding="{Binding flow2}" Header="内轨脚流量(L/min)" FontSize="15"/>
+                        <DataGridTextColumn Binding="{Binding preussre}" Header="压力(Mpa)" FontSize="15"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </dragablz:TabablzControl>
+    </Grid>
+</UserControl>
