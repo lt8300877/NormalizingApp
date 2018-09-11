@@ -56,9 +56,9 @@ namespace NormalizingApp
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //加载原先保存的主题配色
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"Palette.txt"))
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"..\..\Data\Palette\Palette.txt"))
             {
-                using (StreamReader sr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + @"Palette.txt", Encoding.UTF8))
+                using (StreamReader sr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + @"..\..\Data\Palette\Palette.txt", Encoding.UTF8))
                 {
                     string temp = sr.ReadToEnd();
                     MaterialDesignThemes.Wpf.Palette obj = JObject.Parse(temp).ToObject<MaterialDesignThemes.Wpf.Palette>();

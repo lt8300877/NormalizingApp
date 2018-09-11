@@ -1,0 +1,182 @@
+﻿{
+  "PrimarySwatch": {
+    "Name": "lightgreen",
+    "ExemplarHue": {
+      "Name": "Primary500",
+      "Color": "#FF8BC34A",
+      "Foreground": "#DD000000"
+    },
+    "AccentExemplarHue": {
+      "Name": "Accent400",
+      "Color": "#FF76FF03",
+      "Foreground": "#DD000000"
+    },
+    "PrimaryHues": [
+      {
+        "Name": "Primary100",
+        "Color": "#FFDCEDC8",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Primary200",
+        "Color": "#FFC5E1A5",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Primary300",
+        "Color": "#FFAED581",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Primary400",
+        "Color": "#FF9CCC65",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Primary50",
+        "Color": "#FFF1F8E9",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Primary500",
+        "Color": "#FF8BC34A",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Primary600",
+        "Color": "#FF7CB342",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Primary700",
+        "Color": "#FF689F38",
+        "Foreground": "#FFFFFFFF"
+      },
+      {
+        "Name": "Primary800",
+        "Color": "#FF558B2F",
+        "Foreground": "#DDFFFFFF"
+      },
+      {
+        "Name": "Primary900",
+        "Color": "#FF33691E",
+        "Foreground": "#DDFFFFFF"
+      }
+    ],
+    "AccentHues": [
+      {
+        "Name": "Accent100",
+        "Color": "#FFCCFF90",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Accent200",
+        "Color": "#FFB2FF59",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Accent400",
+        "Color": "#FF76FF03",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Accent700",
+        "Color": "#FF64DD17",
+        "Foreground": "#DD000000"
+      }
+    ],
+    "IsAccented": true
+  },
+  "AccentSwatch": {
+    "Name": "lightgreen",
+    "ExemplarHue": {
+      "Name": "Primary500",
+      "Color": "#FF8BC34A",
+      "Foreground": "#DD000000"
+    },
+    "AccentExemplarHue": {
+      "Name": "Accent400",
+      "Color": "#FF76FF03",
+      "Foreground": "#DD000000"
+    },
+    "PrimaryHues": [
+      {
+        "Name": "Primary100",
+        "Color": "#FFDCEDC8",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Primary200",
+        "Color": "#FFC5E1A5",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Primary300",
+        "Color": "#FFAED581",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Primary400",
+        "Color": "#FF9CCC65",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Primary50",
+        "Color": "#FFF1F8E9",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Primary500",
+        "Color": "#FF8BC34A",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Primary600",
+        "Color": "#FF7CB342",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Primary700",
+        "Color": "#FF689F38",
+        "Foreground": "#FFFFFFFF"
+      },
+      {
+        "Name": "Primary800",
+        "Color": "#FF558B2F",
+        "Foreground": "#DDFFFFFF"
+      },
+      {
+        "Name": "Primary900",
+        "Color": "#FF33691E",
+        "Foreground": "#DDFFFFFF"
+      }
+    ],
+    "AccentHues": [
+      {
+        "Name": "Accent100",
+        "Color": "#FFCCFF90",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Accent200",
+        "Color": "#FFB2FF59",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Accent400",
+        "Color": "#FF76FF03",
+        "Foreground": "#DD000000"
+      },
+      {
+        "Name": "Accent700",
+        "Color": "#FF64DD17",
+        "Foreground": "#DD000000"
+      }
+    ],
+    "IsAccented": true
+  },
+  "PrimaryLightHueIndex": 1,
+  "PrimaryMidHueIndex": 5,
+  "PrimaryDarkHueIndex": 7,
+  "AccentHueIndex": 3
+}
