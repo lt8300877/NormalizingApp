@@ -1,176 +1,176 @@
 ﻿{
   "PrimarySwatch": {
-    "Name": "lightgreen",
+    "Name": "purple",
     "ExemplarHue": {
       "Name": "Primary500",
-      "Color": "#FF8BC34A",
-      "Foreground": "#DD000000"
+      "Color": "#FF9C27B0",
+      "Foreground": "#DDFFFFFF"
     },
     "AccentExemplarHue": {
       "Name": "Accent400",
-      "Color": "#FF76FF03",
-      "Foreground": "#DD000000"
+      "Color": "#FFD500F9",
+      "Foreground": "#DDFFFFFF"
     },
     "PrimaryHues": [
       {
         "Name": "Primary100",
-        "Color": "#FFDCEDC8",
+        "Color": "#FFE1BEE7",
         "Foreground": "#DD000000"
       },
       {
         "Name": "Primary200",
-        "Color": "#FFC5E1A5",
+        "Color": "#FFCE93D8",
         "Foreground": "#DD000000"
       },
       {
         "Name": "Primary300",
-        "Color": "#FFAED581",
-        "Foreground": "#DD000000"
+        "Color": "#FFBA68C8",
+        "Foreground": "#FFFFFFFF"
       },
       {
         "Name": "Primary400",
-        "Color": "#FF9CCC65",
-        "Foreground": "#DD000000"
+        "Color": "#FFAB47BC",
+        "Foreground": "#FFFFFFFF"
       },
       {
         "Name": "Primary50",
-        "Color": "#FFF1F8E9",
+        "Color": "#FFF3E5F5",
         "Foreground": "#DD000000"
       },
       {
         "Name": "Primary500",
-        "Color": "#FF8BC34A",
-        "Foreground": "#DD000000"
+        "Color": "#FF9C27B0",
+        "Foreground": "#DDFFFFFF"
       },
       {
         "Name": "Primary600",
-        "Color": "#FF7CB342",
-        "Foreground": "#DD000000"
+        "Color": "#FF8E24AA",
+        "Foreground": "#DDFFFFFF"
       },
       {
         "Name": "Primary700",
-        "Color": "#FF689F38",
-        "Foreground": "#FFFFFFFF"
+        "Color": "#FF7B1FA2",
+        "Foreground": "#DDFFFFFF"
       },
       {
         "Name": "Primary800",
-        "Color": "#FF558B2F",
+        "Color": "#FF6A1B9A",
         "Foreground": "#DDFFFFFF"
       },
       {
         "Name": "Primary900",
-        "Color": "#FF33691E",
+        "Color": "#FF4A148C",
         "Foreground": "#DDFFFFFF"
       }
     ],
     "AccentHues": [
       {
         "Name": "Accent100",
-        "Color": "#FFCCFF90",
+        "Color": "#FFEA80FC",
         "Foreground": "#DD000000"
       },
       {
         "Name": "Accent200",
-        "Color": "#FFB2FF59",
-        "Foreground": "#DD000000"
+        "Color": "#FFE040FB",
+        "Foreground": "#FFFFFFFF"
       },
       {
         "Name": "Accent400",
-        "Color": "#FF76FF03",
-        "Foreground": "#DD000000"
+        "Color": "#FFD500F9",
+        "Foreground": "#DDFFFFFF"
       },
       {
         "Name": "Accent700",
-        "Color": "#FF64DD17",
-        "Foreground": "#DD000000"
+        "Color": "#FFAA00FF",
+        "Foreground": "#DDFFFFFF"
       }
     ],
     "IsAccented": true
   },
   "AccentSwatch": {
-    "Name": "lightgreen",
+    "Name": "deeporange",
     "ExemplarHue": {
       "Name": "Primary500",
-      "Color": "#FF8BC34A",
-      "Foreground": "#DD000000"
+      "Color": "#FFFF5722",
+      "Foreground": "#FFFFFFFF"
     },
     "AccentExemplarHue": {
       "Name": "Accent400",
-      "Color": "#FF76FF03",
-      "Foreground": "#DD000000"
+      "Color": "#FFFF3D00",
+      "Foreground": "#DDFFFFFF"
     },
     "PrimaryHues": [
       {
         "Name": "Primary100",
-        "Color": "#FFDCEDC8",
+        "Color": "#FFFFCCBC",
         "Foreground": "#DD000000"
       },
       {
         "Name": "Primary200",
-        "Color": "#FFC5E1A5",
+        "Color": "#FFFFAB91",
         "Foreground": "#DD000000"
       },
       {
         "Name": "Primary300",
-        "Color": "#FFAED581",
+        "Color": "#FFFF8A65",
         "Foreground": "#DD000000"
       },
       {
         "Name": "Primary400",
-        "Color": "#FF9CCC65",
+        "Color": "#FFFF7043",
         "Foreground": "#DD000000"
       },
       {
         "Name": "Primary50",
-        "Color": "#FFF1F8E9",
+        "Color": "#FFFBE9E7",
         "Foreground": "#DD000000"
       },
       {
         "Name": "Primary500",
-        "Color": "#FF8BC34A",
-        "Foreground": "#DD000000"
-      },
-      {
-        "Name": "Primary600",
-        "Color": "#FF7CB342",
-        "Foreground": "#DD000000"
-      },
-      {
-        "Name": "Primary700",
-        "Color": "#FF689F38",
+        "Color": "#FFFF5722",
         "Foreground": "#FFFFFFFF"
       },
       {
+        "Name": "Primary600",
+        "Color": "#FFF4511E",
+        "Foreground": "#DDFFFFFF"
+      },
+      {
+        "Name": "Primary700",
+        "Color": "#FFE64A19",
+        "Foreground": "#DDFFFFFF"
+      },
+      {
         "Name": "Primary800",
-        "Color": "#FF558B2F",
+        "Color": "#FFD84315",
         "Foreground": "#DDFFFFFF"
       },
       {
         "Name": "Primary900",
-        "Color": "#FF33691E",
+        "Color": "#FFBF360C",
         "Foreground": "#DDFFFFFF"
       }
     ],
     "AccentHues": [
       {
         "Name": "Accent100",
-        "Color": "#FFCCFF90",
+        "Color": "#FFFF9E80",
         "Foreground": "#DD000000"
       },
       {
         "Name": "Accent200",
-        "Color": "#FFB2FF59",
+        "Color": "#FFFF6E40",
         "Foreground": "#DD000000"
       },
       {
         "Name": "Accent400",
-        "Color": "#FF76FF03",
-        "Foreground": "#DD000000"
+        "Color": "#FFFF3D00",
+        "Foreground": "#DDFFFFFF"
       },
       {
         "Name": "Accent700",
-        "Color": "#FF64DD17",
-        "Foreground": "#DD000000"
+        "Color": "#FFDD2C00",
+        "Foreground": "#DDFFFFFF"
       }
     ],
     "IsAccented": true

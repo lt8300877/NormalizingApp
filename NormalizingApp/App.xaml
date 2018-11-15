@@ -23,7 +23,7 @@
                  <!--Dragablz Material Design--> 
                 <ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/materialdesign.xaml"/>
 
-                <ResourceDictionary Source="Views/Style/SliderStyle.xaml"/>
+                <ResourceDictionary Source="Style/SliderStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <!-- MahApps Brushes -->
             <SolidColorBrush x:Key="HighlightBrush" Color="{DynamicResource Primary700}"/>

@@ -1,0 +1,293 @@
+﻿<UserControl xmlns:Views="clr-namespace:NormalizingApp.Views"  x:Class="NormalizingApp.Views.ManualPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmd="clr-namespace:NormalizingApp.MVVM"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1280"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto">
+
+    <DockPanel>
+        <Grid DockPanel.Dock="Top">
+            <!--划分为两栏-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+            </Grid.RowDefinitions>
+            <!--坐标显示栏-->
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="轴名称" Grid.Row="0" Grid.Column="0" FontSize="18" BorderBrush="Black" BorderThickness="1,1,1,1" HorizontalContentAlignment="Center" />
+                <Label Content="实际位置(mm)" Grid.Row="0" Grid.Column="1" FontSize="18" BorderBrush="Black" BorderThickness="0,1,1,1" HorizontalContentAlignment="Center"/>
+                <Label Content="实际速度(mm/m)" Grid.Row="0" Grid.Column="2" FontSize="18" BorderBrush="Black" BorderThickness="0,1,1,1" HorizontalContentAlignment="Center"  />
+                <Label Content="目标位置(mm)" Grid.Row="0" Grid.Column="3" FontSize="18" BorderBrush="Black" BorderThickness="0,1,1,1" HorizontalContentAlignment="Center"  />
+                <Label Content="目标速度(mm/m)" Grid.Row="0" Grid.Column="4" FontSize="18" BorderBrush="Black" BorderThickness="0,1,1,1" HorizontalContentAlignment="Center"  />
+                <Label Content="实际电流(A)" Grid.Row="0" Grid.Column="5" FontSize="18" BorderBrush="Black" BorderThickness="0,1,1,1" HorizontalContentAlignment="Center"  />
+                <Label Content="X轴(南北)" Grid.Row="1" Grid.Column="0" FontSize="18" BorderBrush="Black" BorderThickness="1,0,1,1" HorizontalContentAlignment="Center"  />
+                <Label Content="Y轴(东西)" Grid.Row="2" Grid.Column="0" FontSize="18" BorderBrush="Black" BorderThickness="1,0,1,1" HorizontalContentAlignment="Center"  />
+                <Label Content="Z轴(上下)" Grid.Row="3" Grid.Column="0" FontSize="18" BorderBrush="Black" BorderThickness="1,0,1,1" HorizontalContentAlignment="Center"  />
+                <!--X轴数据显示-->
+                <Border Grid.Column="1" Grid.Row="1"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                    <TextBlock x:Name="xActPosTbk" Text="{Binding Path=XPos ,StringFormat={}{0:F3}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" />
+                </Border>
+                <Border Grid.Column="2" Grid.Row="1"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                    <TextBlock x:Name="xActSpeedTbk" Text="{Binding Path=XSpeed ,StringFormat={}{0:F3}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+                <Border Grid.Column="3" Grid.Row="1"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                    <TextBlock x:Name="xSetPosTbk" Text="{Binding Path=XSetPos ,StringFormat={}{0:F3}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+                <Border Grid.Column="4" Grid.Row="1"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                    <TextBlock x:Name="xSetSpeedTbk" Text="{Binding Path=XSetSpeed ,StringFormat={}{0:F3}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+                <Border Grid.Column="5" Grid.Row="1"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                    <TextBlock x:Name="xActCurrentTbk" Text="{Binding Path=XCurrent ,StringFormat={}{0:F3}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+                <!--Y轴数据显示-->
+                <Border Grid.Column="1" Grid.Row="2"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                    <TextBlock x:Name="yActPosTbk" Text="{Binding Path=YPos ,StringFormat={}{0:F3}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+                <Border Grid.Column="2" Grid.Row="2"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                    <TextBlock x:Name="yActSpeedTbk" Text="{Binding Path=YSpeed ,StringFormat={}{0:F3}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+                <Border Grid.Column="3" Grid.Row="2"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                    <TextBlock x:Name="ySetPosTbk" Text="{Binding Path=YSetPos ,StringFormat={}{0:F3}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+                <Border Grid.Column="4" Grid.Row="2"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                    <TextBlock x:Name="ySetSpeedTbk" Text="{Binding Path=YSetSpeed ,StringFormat={}{0:F3}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+                <Border Grid.Column="5" Grid.Row="2"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                    <TextBlock x:Name="yActCurrentTbk" Text="{Binding Path=YCurrent ,StringFormat={}{0:F3}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+                <!--Z轴数据显示-->
+                <Border Grid.Column="1" Grid.Row="3"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                    <TextBlock x:Name="zActPosTbk" Text="{Binding Path=ZPos ,StringFormat={}{0:F3}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+                <Border Grid.Column="2" Grid.Row="3"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                    <TextBlock x:Name="zActSpeedTbk" Text="{Binding Path=ZSpeed ,StringFormat={}{0:F3}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+                <Border Grid.Column="3" Grid.Row="3"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                    <TextBlock x:Name="zSetPosTbk" Text="{Binding Path=ZSetPos ,StringFormat={}{0:F3}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+                <Border Grid.Column="4" Grid.Row="3"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                    <TextBlock x:Name="zSetSpeedTbk" Text="{Binding Path=ZSetSpeed ,StringFormat={}{0:F3}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+                <Border Grid.Column="5" Grid.Row="3"  BorderBrush="Black" BorderThickness="0,0,1,1" CornerRadius="0" >
+                    <TextBlock x:Name="zActCurrentTbk" Text="{Binding Path=ZCurrent ,StringFormat={}{0:F3}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                </Border>
+            </Grid>
+            <!--其他参数显示栏-->
+            <Grid Grid.Row="1">
+                <Canvas>
+                    <!--电源控制-->
+                    <GroupBox Header="电源控制" Canvas.Left="16" Canvas.Top="20" Height="250" Width="300" FontSize="18">
+                        <Canvas Background="{Binding Path=PowerBrush}">
+                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="电源启动" Canvas.Left="50" Canvas.Top="120">
+                                <materialDesign:PackIcon Kind="ArrowRightDropCircle" Height="30" Width="30" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding PowerStartButtonClick}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="电源停止" Canvas.Left="175" Canvas.Top="120">
+                                <materialDesign:PackIcon Kind="StopCircle" Height="30" Width="30" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding PowerStopButtonClick}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                            <Label Content="功率设定(%)" FontSize="18" Canvas.Left="36" Canvas.Top="10"/>
+
+                            <Views:IORegionControl Canvas.Left="151" Canvas.Top="10" InputText="{Binding Path=PowerSet,Mode=OneWayToSource}" OutputText="{Binding Path=ActPowerSet}" Width="86">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="KeyDown">
+                                        <cmd:MyEventCommand Command="{Binding PowerSetTextChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Views:IORegionControl>
+                            
+                            <Label Content="时间设定(s)" FontSize="18" Canvas.Left="36" Canvas.Top="55" Width="110"/>
+
+                            <Views:IORegionControl Canvas.Left="151" Canvas.Top="55" Width="86" InputText="{Binding Path=PowerTimeSet,Mode=OneWayToSource}" OutputText="{Binding Path=ActPowerTimeSet}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="KeyDown">
+                                        <cmd:MyEventCommand Command="{Binding PowerTimeSetTextChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Views:IORegionControl>
+
+                        </Canvas>
+                    </GroupBox>
+                    <!--喷风控制-->
+                    <GroupBox Header="喷风控制" Canvas.Left="332" Canvas.Top="20" Height="250" Width="300" FontSize="18">
+                        <Canvas Background="{Binding Path=WindBrush}">
+                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="喷风启动" Canvas.Left="50" Canvas.Top="68">
+                                <materialDesign:PackIcon Kind="ArrowRightDropCircle" Height="30" Width="30" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding WindStartButtonClick}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="喷风停止" Canvas.Left="175" Canvas.Top="68">
+                                <materialDesign:PackIcon Kind="StopCircle" Height="30" Width="30" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding WindStopButtonClick}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </Canvas>
+                    </GroupBox>
+                    <!--Y轴位移气缸控制-->
+                    <GroupBox Header="Y轴位移气缸控制" Canvas.Left="648" Canvas.Top="20" Height="250" Width="300" FontSize="18">
+                        <Canvas Background="{Binding Path=YCylinderBrush}">
+                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Y轴位移气缸前进" Canvas.Left="50" Canvas.Top="68">
+                                <materialDesign:PackIcon Kind="ChevronDoubleLeft" Height="30" Width="30" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding YCylinderStartButtonClick}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Y轴位移气缸后退" Canvas.Left="175" Canvas.Top="68">
+                                <materialDesign:PackIcon Kind="ChevronDoubleRight" Height="30" Width="30" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding YCylinderStopButtonClick}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </Canvas>
+                    </GroupBox>
+                    <!--Z轴位移气缸控制-->
+                    <GroupBox Header="Z轴位移气缸控制" Canvas.Left="964" Canvas.Top="20" Height="250" Width="300" FontSize="18">
+                        <Canvas Background="{Binding Path=ZCylinderBrush}">
+                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Z轴位移气缸上升" Canvas.Left="50" Canvas.Top="68">
+                                <materialDesign:PackIcon Kind="ChevronDoubleUp" Height="30" Width="30" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding ZCylinderStartButtonClick}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Z轴位移气缸下降" Canvas.Left="175" Canvas.Top="68">
+                                <materialDesign:PackIcon Kind="ChevronDoubleDown" Height="30" Width="30" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding ZCylinderStopButtonClick}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </Canvas>
+                    </GroupBox>
+                    <!--1#顶料气缸控制-->
+                    <GroupBox Header="1#顶料气缸控制" Canvas.Left="16" Canvas.Top="290" Height="250" Width="300" FontSize="18">
+                        <Canvas Background="{Binding Path=DL1CylinderBrush}">
+                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="1#顶料气缸上升" Canvas.Left="50" Canvas.Top="68">
+                                <materialDesign:PackIcon Kind="ChevronDoubleUp" Height="30" Width="30" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding DL1CylinderStartButtonClick}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="1#顶料气缸下降" Canvas.Left="175" Canvas.Top="68">
+                                <materialDesign:PackIcon Kind="ChevronDoubleDown" Height="30" Width="30" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding DL1CylinderStopButtonClick}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </Canvas>
+                    </GroupBox>
+                    <!--2#顶料气缸控制-->
+                    <GroupBox Header="2#顶料气缸控制" Canvas.Left="332" Canvas.Top="290" Height="250" Width="300" FontSize="18">
+                        <Canvas Background="{Binding Path=DL2CylinderBrush}">
+                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="2#顶料气缸上升" Canvas.Left="50" Canvas.Top="68">
+                                <materialDesign:PackIcon Kind="ChevronDoubleUp" Height="30" Width="30" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding DL2CylinderStartButtonClick}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="2#顶料气缸下降" Canvas.Left="175" Canvas.Top="68">
+                                <materialDesign:PackIcon Kind="ChevronDoubleDown" Height="30" Width="30" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding DL2CylinderStopButtonClick}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </Canvas>
+                    </GroupBox>
+                    <!--3#顶料气缸控制-->
+                    <GroupBox Header="3#顶料气缸控制" Canvas.Left="648" Canvas.Top="290" Height="250" Width="300" FontSize="18">
+                        <Canvas Background="{Binding Path=DL3CylinderBrush}">
+                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="3#顶料气缸上升" Canvas.Left="50" Canvas.Top="68">
+                                <materialDesign:PackIcon Kind="ChevronDoubleUp" Height="30" Width="30" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding DL3CylinderStartButtonClick}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="3#顶料气缸下降" Canvas.Left="175" Canvas.Top="68">
+                                <materialDesign:PackIcon Kind="ChevronDoubleDown" Height="30" Width="30" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding DL3CylinderStopButtonClick}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </Canvas>
+                    </GroupBox>
+                    <!--4#顶料气缸控制-->
+                    <GroupBox Header="4#顶料气缸控制" Canvas.Left="964" Canvas.Top="290" Height="250" Width="300" FontSize="18">
+                        <Canvas Background="{Binding Path=DL4CylinderBrush}">
+                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="4#顶料气缸上升" Canvas.Left="50" Canvas.Top="68">
+                                <materialDesign:PackIcon Kind="ChevronDoubleUp" Height="30" Width="30" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding DL4CylinderStartButtonClick}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="4#顶料气缸下降" Canvas.Left="175" Canvas.Top="68">
+                                <materialDesign:PackIcon Kind="ChevronDoubleDown" Height="30" Width="30" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding DL4CylinderStopButtonClick}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </Canvas>
+                    </GroupBox>
+                </Canvas>
+            </Grid>
+        </Grid>
+
+    </DockPanel>
+</UserControl>

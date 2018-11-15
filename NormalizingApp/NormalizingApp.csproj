@@ -8,11 +8,12 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>NormalizingApp</RootNamespace>
     <AssemblyName>NormalizingApp</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,6 +37,9 @@
   <PropertyGroup>
     <StartupObject>NormalizingApp.App</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>zt.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CircularGauge, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -50,8 +54,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>dll\DynamicDataDisplay.dll</HintPath>
     </Reference>
-    <Reference Include="HslCommunication, Version=5.3.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="HslCommunication">
       <HintPath>dll\HslCommunication.dll</HintPath>
     </Reference>
     <Reference Include="Interop.ADOX">
@@ -72,12 +75,16 @@
     <Reference Include="MaterialDesignThemes.Wpf">
       <HintPath>dll\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Interactivity">
+      <HintPath>dll\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -96,74 +103,80 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AccessLib\CQServices.cs" />
-    <Compile Include="AccessLib\DBHelp.cs" />
-    <Compile Include="Lib\ConfigIni.cs" />
+    <Compile Include="DataBase\CQServices.cs" />
+    <Compile Include="DataBase\DBHelp.cs" />
+    <Compile Include="Lib\AsyncObservableCollection.cs" />
+    <Compile Include="Lib\MyValueEvent.cs" />
+    <Compile Include="MVVM\MyCommand.cs" />
+    <Compile Include="Lib\INIFile.cs" />
     <Compile Include="Lib\ControlBinding.cs" />
-    <Compile Include="Lib\FileBuff.cs" />
+    <Compile Include="Lib\BinaryFile.cs" />
     <Compile Include="Lib\S71KConnect.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Alarm.cs" />
-    <Compile Include="Model\MyDataRecipe.cs" />
-    <Compile Include="Model\PartNumber.cs" />
-    <Compile Include="Model\PLCItems.cs" />
-    <Compile Include="Model\Record.cs" />
-    <Compile Include="Views\AnotherCommandImplementation.cs" />
-    <Compile Include="Views\Controls\Palette.xaml.cs">
+    <Compile Include="TextInputBox.xaml.cs">
+      <DependentUpon>TextInputBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AlarmSystemPageViewModel.cs" />
+    <Compile Include="ViewModels\AutoPageViewModel.cs" />
+    <Compile Include="ViewModels\CurvePageViewModel.cs" />
+    <Compile Include="ViewModels\HomePageViewModel.cs" />
+    <Compile Include="ViewModels\LoginWindowViewModel.cs" />
+    <Compile Include="Models\Alarm.cs" />
+    <Compile Include="Models\MyDataRecipe.cs" />
+    <Compile Include="Models\ProductNumber.cs" />
+    <Compile Include="Models\PLCItems.cs" />
+    <Compile Include="Models\DataBaseRecord.cs" />
+    <Compile Include="MVVM\MyCommandGeneric.cs" />
+    <Compile Include="MVVM\MyEventCommand.cs" />
+    <Compile Include="MVVM\NotifyObject.cs" />
+    <Compile Include="MVVM\AnotherCommandImplementation.cs" />
+    <Compile Include="ViewModels\ManualPageViewModel.cs" />
+    <Compile Include="ViewModels\TextInputBoxViewModel.cs" />
+    <Compile Include="Views\IORegionControl.xaml.cs">
+      <DependentUpon>IORegionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Palette.xaml.cs">
       <DependentUpon>Palette.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Dialogs\DialogsViewModel.cs" />
-    <Compile Include="Views\Dialogs\NotEmptyValidationRule.cs" />
-    <Compile Include="Views\Dialogs\Sample4Dialog.xaml.cs">
-      <DependentUpon>Sample4Dialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dialogs\SampleDialog.xaml.cs">
-      <DependentUpon>SampleDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dialogs\SampleDialogViewModel.cs" />
-    <Compile Include="Views\Dialogs\SampleMessageDialog.xaml.cs">
-      <DependentUpon>SampleMessageDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dialogs\SampleProgressDialog.xaml.cs">
+    <Compile Include="Views\SampleProgressDialog.xaml.cs">
       <DependentUpon>SampleProgressDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Messagebox\CMessageBox.cs" />
-    <Compile Include="Views\Messagebox\CMessageBoxWindow.xaml.cs">
+    <Compile Include="Messagebox\CMessageBox.cs" />
+    <Compile Include="Messagebox\CMessageBoxWindow.xaml.cs">
       <DependentUpon>CMessageBoxWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\Model\MainWindowItem.cs" />
-    <Compile Include="Views\Model\MainWindowViewModel.cs" />
-    <Compile Include="Views\NotifyPropertyChangedExtension.cs" />
-    <Compile Include="Views\Model\PaletteSelectorViewModel.cs" />
-    <Compile Include="Views\Model\TextItemModel.cs" />
-    <Compile Include="Views\UIControls\AlarmSystemPage.xaml.cs">
+    <Compile Include="Models\MainWindowItem.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="MVVM\NotifyPropertyChangedExtension.cs" />
+    <Compile Include="ViewModels\PaletteSelectorViewModel.cs" />
+    <Compile Include="Views\AlarmSystemPage.xaml.cs">
       <DependentUpon>AlarmSystemPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UIControls\AutoPage.xaml.cs">
+    <Compile Include="Views\AutoPage.xaml.cs">
       <DependentUpon>AutoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UIControls\CurvePage.xaml.cs">
+    <Compile Include="Views\CurvePage.xaml.cs">
       <DependentUpon>CurvePage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\UIControls\DataQueryPage.xaml.cs">
+    <Compile Include="Views\DataQueryPage.xaml.cs">
       <DependentUpon>DataQueryPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\UIControls\HomePage.xaml.cs">
+    <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\UIControls\ManualPage.xaml.cs">
+    <Compile Include="Views\ManualPage.xaml.cs">
       <DependentUpon>ManualPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UIControls\SystemSet.xaml.cs">
+    <Compile Include="Views\SystemSet.xaml.cs">
       <DependentUpon>SystemSet.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UIControls\UserPaletteSelector.xaml.cs">
+    <Compile Include="Views\UserPaletteSelector.xaml.cs">
       <DependentUpon>UserPaletteSelector.xaml</DependentUpon>
     </Compile>
     <Page Include="LoginWindow.xaml">
@@ -182,63 +195,59 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Controls\Palette.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Dialogs\Sample4Dialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Dialogs\SampleDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Dialogs\SampleMessageDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Dialogs\SampleProgressDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Messagebox\CMessageBoxWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Style\SliderStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\UIControls\AlarmSystemPage.xaml">
+    <Page Include="TextInputBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UIControls\AutoPage.xaml">
+    <Page Include="Views\IORegionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UIControls\CurvePage.xaml">
+    <Page Include="Views\Palette.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\UIControls\DataQueryPage.xaml">
+    <Page Include="Views\SampleProgressDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\UIControls\HomePage.xaml">
+    <Page Include="Messagebox\CMessageBoxWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\UIControls\ManualPage.xaml">
+    <Page Include="Style\SliderStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AlarmSystemPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UIControls\SystemSet.xaml">
+    <Page Include="Views\AutoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UIControls\UserPaletteSelector.xaml">
+    <Page Include="Views\CurvePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DataQueryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\HomePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ManualPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SystemSet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserPaletteSelector.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -261,7 +270,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -292,6 +300,15 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zt.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="zt.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

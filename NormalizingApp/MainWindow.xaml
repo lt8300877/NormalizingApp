@@ -5,16 +5,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1280"
-        WindowStyle="None" WindowState="Maximized" Closing="Window_Closing" Loaded="Window_Loaded"
+        Height="800" Width="1280"
+        WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
-        Background="{DynamicResource MaterialDesignPaper}">
+        Background="{DynamicResource MaterialDesignPaper}" >
 
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding WindowClosing}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding WindowLoaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -34,6 +44,8 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
+
+
     <materialDesign:DialogHost x:Name="DialogHostWait">
         <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
             <materialDesign:DrawerHost.LeftDrawerContent>
@@ -58,7 +70,7 @@
                                         <DataTemplate>
                                             <StackPanel Margin="8" Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="Airplay" HorizontalAlignment="Center" VerticalAlignment="Center" Height="32" Width="32" Margin="0,0,8,0"/>
-                                                <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding Path= Name}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
@@ -66,26 +78,23 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-
-
                 </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
             <DockPanel>
                 <materialDesign:ColorZone Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid" DockPanel.Dock="Top">
                     <DockPanel>
-                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
-                                        x:Name="MenuToggleButton"/>
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False" x:Name="MenuToggleButton"/>
+                                        
                         <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                             <StackPanel>
                                 <Button Content="重启计算机" Click="MenuPopupButton_OnClick" />
                                 <Button Content="关闭计算机" Click="MenuPopupButton_OnClick" />
                                 <Separator/>
                                 <Button Content="退出系统" Click="MenuPopupButton_OnClick"/>
-
                             </StackPanel>
                         </materialDesign:PopupBox>
-                        <TextBlock x:Name="TextBlock_Title" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30">十堰高周波钢轨正火机床</TextBlock>
+                        <TextBlock  TextAlignment="Center" FontSize="30">全自动钢轨焊接接头热处理设备</TextBlock>
                     </DockPanel>
                 </materialDesign:ColorZone>
 
@@ -97,20 +106,22 @@
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock x:Name="TextBlock_CopyRight">十堰高周波科工贸有限公司</TextBlock>
-                                <TextBlock Margin="20,0,0,0">版本号：</TextBlock>
-                                <TextBlock x:Name="TextBlock_Version" Text="{Binding Path=Content}"/>
+                                <TextBlock Text="当前界面: " />
+                                <TextBlock Text="{Binding ElementName=DemoItemsListView,Path=SelectedItem.Name}" /> 
+                                
+                                <TextBlock Margin="20,0,0,0">版本号:</TextBlock>
+                                <TextBlock Text="{Binding Path=VersionNumber}"/>
                                 <TextBlock Margin="20,0,0,0">通讯状态：</TextBlock>
-                                <TextBlock x:Name="TextBlock_ClientStatus" Text="{Binding Path=Content}"/> 
-                                <TextBlock Margin="20,0,0,0" Foreground="DodgerBlue">温馨提示：</TextBlock>
-                                <TextBlock x:Name="TextBlock_Information" Foreground="DodgerBlue" Text="{Binding Path=Content}"/>
+                                <TextBlock Text="{Binding Path=ConnectionState}"/>
+                                <TextBlock Margin="20,0,0,0" Foreground="DodgerBlue">焊缝编号：</TextBlock>
+                                <TextBlock Foreground="DodgerBlue" Text="{Binding Path=ProductNumber}"/>
                             </StackPanel>
 
                             <StackPanel Grid.Column="1" Orientation="Horizontal" >
                                 <TextBlock>时间：</TextBlock>
-                                <TextBlock x:Name="TextBlock_ServerTime" Text="{Binding Path=Content}"/>
+                                <TextBlock Text="{Binding Path=SystempDateTime}"/>
                                 <TextBlock Margin="20,0,0,0">通讯延迟：</TextBlock>
-                                <TextBlock x:Name="TextBlock_ServerDelay" Text="{Binding Path=Content}"/>
+                                <TextBlock Text="{Binding Path=ConnectionDelay}"/>
                                 <TextBlock>ms</TextBlock>
                             </StackPanel>
                         </Grid>
@@ -118,8 +129,7 @@
                 </Grid>
 
                 <Grid>
-                    <ContentControl x:Name="UserContentControl" Margin="3,3,3,3" Content="{Binding ElementName=DemoItemsListView, Path=SelectedItem.Content}"/>
-
+                    <ContentControl x:Name="UserContentControl"  Content="{Binding ElementName=DemoItemsListView, Path=SelectedItem.Content}"/>
                     <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="SoftSnackbar"/>
                 </Grid>
 

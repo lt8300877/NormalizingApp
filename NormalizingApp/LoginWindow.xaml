@@ -1,11 +1,14 @@
-﻿<Window x:Class="NormalizingApp.LoginWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="clr-namespace:NormalizingApp.MVVM"
+        xmlns:Views="clr-namespace:NormalizingApp.Views" x:Class="NormalizingApp.LoginWindow"
         mc:Ignorable="d"
-        Title="编号设置" Height="400" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
+        Title="编号设置" Height="400" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,51 +20,69 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignCaptionTextBlock}" x:Key="Caption">
-                <Setter Property="Opacity" Value=".68"></Setter>
+            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignCaptionTextBlock}" x:Key="Caption">
+                <Setter Property="Opacity" Value=".68"/>
             </Style>
         </ResourceDictionary>
     </Window.Resources>
-    
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <StackPanel>
-            <materialDesign:Card Padding="5"  Background="{DynamicResource PrimaryHueMidBrush}">
-                <TextBlock x:Name="TextBlockSoftName" TextAlignment="Center" FontSize="25" Style="{DynamicResource MaterialDesignTitleTextBlock}">钢轨焊缝编号信息设置</TextBlock>
+        <Canvas >
+            <materialDesign:Card Padding="5"  Background="{DynamicResource PrimaryHueMidBrush}" Width="500">
+                <TextBlock x:Name="TextBlockSoftName" TextAlignment="Center" FontSize="25" Style="{DynamicResource MaterialDesignTitleTextBlock}"><Run Text="钢轨焊缝编号信息设置"/></TextBlock>
             </materialDesign:Card>
 
-            <Grid Margin="8">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <ComboBox x:Name="OperatorNameCbx" FontSize="20" Margin="8" materialDesign:HintAssist.Hint="操作员选择" Grid.Row="0" Grid.Column="2" SelectionChanged="OperatorNameCbx_SelectionChanged"/>
-                <ComboBox x:Name="LineNameCbx" FontSize="20" Margin="8" materialDesign:HintAssist.Hint="生产线名称" Grid.Row="1" Grid.Column="2" SelectionChanged="LineNameCbx_SelectionChanged"/>
-                <ComboBox x:Name="GroupNameCbx" FontSize="20" Margin="8" materialDesign:HintAssist.Hint="班组" Grid.Row="2" Grid.Column="2" SelectionChanged="GroupNameCbx_SelectionChanged"/>
-                <DatePicker x:Name="DatePickerCtl" FontSize="20" Margin="8" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Grid.Row="3" Grid.Column="2" SelectedDateChanged="DatePickerCtl_SelectedDateChanged"/>
-                <TextBox x:Name="NumberTbx" FontSize="20" Margin="8" materialDesign:HintAssist.Hint="接头号"  Grid.Row="4" Grid.Column="2" TextChanged="NumberTbx_TextChanged"/>
-                <Button x:Name="LoginBtn" Grid.Row="7" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedDarkButton}"  ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Click="LoginBtn_Click" >确定</Button>
-                <Button x:Name="ExitBtn" Grid.Row="7" Grid.Column="3" Style="{StaticResource MaterialDesignRaisedDarkButton}"  ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Click="ExitBtn_Click" >退出</Button>
+            <ComboBox ItemsSource="{Binding OperatorName}" SelectedIndex="{Binding OperatorNameIndex, Mode=TwoWay}" FontSize="20" materialDesign:HintAssist.Hint="操作员选择"   Canvas.Left="221" Canvas.Top="88" Width="150">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding OperatorNameComboBoxSelectionChanged}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
 
-            </Grid>
-        </StackPanel>
+            <ComboBox  ItemsSource="{Binding LineName}" SelectedIndex="{Binding LineNameNameIndex, Mode=TwoWay}" FontSize="20" materialDesign:HintAssist.Hint="生产线名称" Canvas.Left="221" Canvas.Top="138" Width="150" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding LineNameNameComboBoxSelectionChanged}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+
+            <ComboBox  ItemsSource="{Binding GroupName}" SelectedIndex="{Binding GroupNameNameIndex, Mode=TwoWay}" FontSize="20" materialDesign:HintAssist.Hint="班组" Canvas.Left="221" Canvas.Top="188"  Width="150" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding GroupNameComboBoxSelectionChanged}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </ComboBox>
+
+            <DatePicker SelectedDate="{Binding SelectData, Mode=TwoWay}" FontSize="20" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Canvas.Left="221" Canvas.Top="238" Width="150">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectedDateChanged">
+                        <i:InvokeCommandAction Command="{Binding DatePickerSelectedDateChanged}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DatePicker>
+
+            <TextBox Text="{Binding SpliceNumber, UpdateSourceTrigger=PropertyChanged}" FontSize="20" materialDesign:HintAssist.Hint="接头号" Canvas.Left="221" Canvas.Top="288" Width="150">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding SpliceNumberTextChanged}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+
+            <Button Command="{Binding OkButtonCommand}" Content="确定" Style="{StaticResource MaterialDesignRaisedDarkButton}"  ToolTip="进入系统" Canvas.Left="137" Canvas.Top="340" />
+
+            <Button Command="{Binding ExitButtonCommand}" Content="退出" Style="{StaticResource MaterialDesignRaisedDarkButton}"  ToolTip="退出系统" Canvas.Left="303" Canvas.Top="340" />
+            <Label Content="操作者:" FontSize="20"  Canvas.Left="126" Canvas.Top="90" />
+            <Label Content="生产线:" FontSize="20"  Canvas.Left="126" Canvas.Top="140" />
+            <Label Content="班组:" FontSize="20"  Canvas.Left="146" Canvas.Top="190" />
+            <Label Content="日期:" FontSize="20"  Canvas.Left="146" Canvas.Top="237" />
+            <Label Content="接头号:" FontSize="20"  Canvas.Left="126" Canvas.Top="287" />
+            <TextBlock  Text="{Binding ProductNumberFull}" FontSize="20" TextAlignment="Center" Canvas.Left="0" Canvas.Top="48" Width="500"/>
+        </Canvas>
+
     </Grid>
 </Window>

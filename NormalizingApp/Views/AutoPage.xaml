@@ -1,0 +1,401 @@
+﻿<UserControl xmlns:Views="clr-namespace:NormalizingApp.Views"  x:Class="NormalizingApp.Views.AutoPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmd="clr-namespace:NormalizingApp.MVVM"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1280"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto">
+
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <DockPanel  Grid.Column="0"  Margin="5">
+            <GroupBox Header="位移传感器参数设定(单位:mm)" FontSize="16" DockPanel.Dock="Top" Height="150">
+                <Canvas>
+                    <Label Content="Y轴传感器" FontSize="16" Canvas.Left="10" Canvas.Top="12" Height="30" Width="90"/>
+                    <TextBlock Text="{Binding Path=YLenght,StringFormat={}{0:F2}}"  FontSize="20" Canvas.Left="101" Canvas.Top="15" Width="90" Height="30" />
+                    <Label Content="Z轴传感器:" FontSize="16" Canvas.Left="10" Canvas.Top="47" Height="30" Width="90"/>
+                    <TextBlock Text="{Binding Path=ZLenght,StringFormat={}{0:F2}}" FontSize="20" Canvas.Left="101" Canvas.Top="50" Width="90" Height="30" />
+                    
+                    <Label Content="焊缝高度:" HorizontalContentAlignment="Right" FontSize="16" Canvas.Left="170" Canvas.Top="47" Height="30" Width="114"/>
+                    <Views:IORegionControl Canvas.Left="286" Canvas.Top="47" InputText="{Binding Path=WeldingHeight,Mode=OneWayToSource}" OutputText="{Binding Path=ActWeldingHeight}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding WeldingHeightTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+                    
+                    
+                    <Label Content="Y轴焊缝零位:" HorizontalContentAlignment="Right" FontSize="16" Canvas.Left="170" Canvas.Top="12" Height="30" Width="114"/>
+                    <Views:IORegionControl Canvas.Left="286" Canvas.Top="12" InputText="{Binding Path=WeldingHome,Mode=OneWayToSource}" OutputText="{Binding Path=ActWeldingHome}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding WeldingHomeTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+
+                    <Label Content="Y轴补偿零位:" HorizontalContentAlignment="Right" FontSize="16" Canvas.Left="405" Canvas.Top="12" Height="30" Width="112"/>
+                    <Views:IORegionControl Canvas.Left="519" Canvas.Top="12" InputText="{Binding Path=YCompensationHome,Mode=OneWayToSource}" OutputText="{Binding Path=ActYCompensationHome}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding YCompensationHomeTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+
+                    <Label Content="Z轴补偿零位:" HorizontalContentAlignment="Right" FontSize="16" Canvas.Left="405" Canvas.Top="47" Height="30" Width="112"/>
+                    <Views:IORegionControl Canvas.Left="519" Canvas.Top="47" InputText="{Binding Path=ZCompensationHome,Mode=OneWayToSource}" OutputText="{Binding Path=ActZCompensationHome}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding ZCompensationHomeTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+                    
+                    <Label Content="找焊缝使能:" HorizontalContentAlignment="Right" FontSize="16" Canvas.Left="624" Canvas.Top="47" Height="30" Width="112"/>
+                    <Label Content="补偿使能:" HorizontalContentAlignment="Right" FontSize="16" Canvas.Left="624" Canvas.Top="12" Height="30" Width="112"/>
+                    <ToggleButton Style="{StaticResource MaterialDesignSwitchDarkToggleButton}" ToolTip="启动自动补偿开关" IsChecked="{Binding Path=AutoCompensationEnabled,Mode=TwoWay}" Canvas.Left="744" Canvas.Top="20">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding AutoCompensationEnabledChecked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ToggleButton>
+                    <ToggleButton Style="{StaticResource MaterialDesignSwitchDarkToggleButton}" ToolTip="启动找焊缝开关" IsChecked="{Binding Path=AutoWeldingEnabled,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Canvas.Left="744" Canvas.Top="55" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding AutoWeldingEnabledChecked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ToggleButton>
+                </Canvas>
+            </GroupBox>
+
+            <GroupBox Header="伺服轴运动位置设定(单位:mm)" FontSize="16" DockPanel.Dock="Top" Height="200">
+                <Canvas>
+                    <Label Content="X轴实际值:" FontSize="16" Canvas.Left="10" Canvas.Top="7" Height="30" Width="90"/>
+                    <Label Content="Y轴实际值:" FontSize="16" Canvas.Left="10" Canvas.Top="56" Height="30" Width="90"/>
+                    <Label Content="Z轴实际值:" FontSize="16" Canvas.Left="10" Canvas.Top="105" Height="30" Width="90"/>
+                    <TextBlock Text="{Binding Path=XPos,StringFormat={}{0:F2}}" FontSize="20" Canvas.Left="101" Width="70" Height="30" Canvas.Top="10" />
+                    <TextBlock Text="{Binding Path=YPos,StringFormat={}{0:F2}}" FontSize="20" Canvas.Left="101" Width="70" Height="30" Canvas.Top="59" />
+                    <TextBlock Text="{Binding Path=ZPos,StringFormat={}{0:F2}}"  FontSize="20" Canvas.Left="101" Width="70" Height="30" Canvas.Top="108" />
+                    
+                    <Label Content="起始位置(mm)" HorizontalContentAlignment="Center" FontSize="16" Canvas.Left="186" Canvas.Top="9" Height="30" Width="125"/>
+                    <Views:IORegionControl Canvas.Left="186" Canvas.Top="39" InputText="{Binding Path=HomePos,Mode=OneWayToSource}" OutputText="{Binding Path=ActHomePos}" Width="125">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding HomePosTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+
+                    <Label Content="速度(mm/min)" HorizontalContentAlignment="Center" FontSize="16" Canvas.Left="186" Canvas.Top="74" Height="30" Width="125"/>
+                    <Views:IORegionControl Canvas.Left="186" Canvas.Top="104" InputText="{Binding Path=HomeSpeed,Mode=OneWayToSource}" OutputText="{Binding Path=ActHomeSpeed}" Width="125">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding HomeSpeedTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+
+                    <Label Content="焊缝极限(mm)" HorizontalContentAlignment="Center" FontSize="16" Canvas.Left="328" Canvas.Top="9" Height="30" Width="125"/>
+                    <Views:IORegionControl Canvas.Left="328" Canvas.Top="39" InputText="{Binding Path=MaxPos,Mode=OneWayToSource}" OutputText="{Binding Path=ActMaxPos}" Width="125">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding MaxPosTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+
+                    <Label Content="速度(mm/min)" HorizontalContentAlignment="Center" FontSize="16" Canvas.Left="328" Canvas.Top="74" Height="30" Width="125"/>
+                    <Views:IORegionControl Canvas.Left="328" Canvas.Top="104" InputText="{Binding Path=MaxSpeed,Mode=OneWayToSource}" OutputText="{Binding Path=ActMaxSpeed}" Width="125">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding MaxSpeedTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+
+                    <Label Content="加热距离(mm)" HorizontalContentAlignment="Center" FontSize="16" Canvas.Left="471" Canvas.Top="9" Height="30" Width="125"/>
+                    <Views:IORegionControl Canvas.Left="471" Canvas.Top="39" InputText="{Binding Path=HeatPos,Mode=OneWayToSource}" OutputText="{Binding Path=ActHeatPos}" Width="125">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding HeatPosTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+
+                    <Label Content="速度(mm/min)" HorizontalContentAlignment="Center" FontSize="16" Canvas.Left="471" Canvas.Top="74" Height="30" Width="125"/>
+                    <Views:IORegionControl Canvas.Left="471" Canvas.Top="104" InputText="{Binding Path=HeatSpeed,Mode=OneWayToSource}" OutputText="{Binding Path=ActHeatSpeed}" Width="125">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding HeatSpeedTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+
+                    <Label Content="喷风距离(mm)" HorizontalContentAlignment="Center" FontSize="16" Canvas.Left="615" Canvas.Top="9" Height="30" Width="125"/>
+                    <Views:IORegionControl Canvas.Left="615" Canvas.Top="39" InputText="{Binding Path=WindPos,Mode=OneWayToSource}" OutputText="{Binding Path=ActWindPos}" Width="125">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding WindPosTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+
+                    <Label Content="速度(mm/min)" HorizontalContentAlignment="Center" FontSize="16" Canvas.Left="615" Canvas.Top="74" Height="30" Width="125"/>
+                    <Views:IORegionControl Canvas.Left="615" Canvas.Top="104" InputText="{Binding Path=WindSpeed,Mode=OneWayToSource}" OutputText="{Binding Path=ActWindSpeed}" Width="125">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding WindSpeedTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+                    
+                </Canvas>
+            </GroupBox>
+
+            <GroupBox Header="工艺参数设定" FontSize="16" DockPanel.Dock="Top">
+                <Canvas>
+                    <Label Content="程序段" HorizontalContentAlignment="Center" FontSize="16" Canvas.Left="10" Canvas.Top="5" Height="30" Width="125"/>
+                    <Label Content="温度设定(℃)" HorizontalContentAlignment="Center" FontSize="16" Canvas.Left="131" Canvas.Top="5" Height="30" Width="125"/>
+                    <Label Content="功率设定(%)" HorizontalContentAlignment="Center" FontSize="16" Canvas.Left="261" Canvas.Top="5" Height="30" Width="125"/>
+                    <Label Content="冷却方式" HorizontalContentAlignment="Center" FontSize="16" Canvas.Left="391" Canvas.Top="5" Height="30" Width="125"/>
+                    <Label Content="冷却参数(s/℃)" HorizontalContentAlignment="Center" FontSize="16" Canvas.Left="521" Canvas.Top="5" Height="30" Width="125"/>
+                    <Label Content="起始状态" HorizontalContentAlignment="Center" FontSize="16" Canvas.Left="10" Canvas.Top="40" Height="30" Width="125"/>
+                    <Label Content="转变状态" HorizontalContentAlignment="Center" FontSize="16" Canvas.Left="10" Canvas.Top="75" Height="30" Width="125"/>
+                    <Label Content="最终状态" HorizontalContentAlignment="Center" FontSize="16" Canvas.Left="10" Canvas.Top="110" Height="30" Width="125"/>
+                    <Views:IORegionControl Canvas.Left="131" Canvas.Top="40" InputText="{Binding Path=HaetTempSet1,Mode=OneWayToSource}" OutputText="{Binding Path=ActHaetTempSet1}" Width="125">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding HaetTempSet1TextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+                    
+                    <Views:IORegionControl Canvas.Left="261" Canvas.Top="40" InputText="{Binding Path=PowerSet1,Mode=OneWayToSource}" OutputText="{Binding Path=ActPowerSet1}" Width="125">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding PowerSet1TextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+
+                    <RadioButton x:Name="aa" IsChecked="{Binding Path= TempMode,Mode=TwoWay}" GroupName="mode" Content="温度" VerticalContentAlignment="Center" Style="{StaticResource MaterialDesignRadioButton}" Canvas.Left="425" Canvas.Top="46" Width="80">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding TempModeClick}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </RadioButton>
+
+                    <Views:IORegionControl Canvas.Left="521" Canvas.Top="40" IsEnabled="{Binding ElementName=aa, Path=IsChecked}" InputText="{Binding Path=WindTempSet,Mode=OneWayToSource}" OutputText="{Binding Path=ActWindTempSet}" Width="125">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding WindTempSetTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+
+                    <Views:IORegionControl Canvas.Left="131" Canvas.Top="75" InputText="{Binding Path=HaetTempSet2,Mode=OneWayToSource}" OutputText="{Binding Path=ActHaetTempSet2}" Width="125">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding HaetTempSet2TextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+
+                    <Views:IORegionControl Canvas.Left="261" Canvas.Top="75" InputText="{Binding Path=PowerSet2,Mode=OneWayToSource}" OutputText="{Binding Path=ActPowerSet2}" Width="125">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding PowerSet2TextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+
+                    <RadioButton x:Name="bb" IsChecked="{Binding Path= TimeMode,Mode=TwoWay}" GroupName="mode" Content="时间" VerticalContentAlignment="Center" Style="{StaticResource MaterialDesignRadioButton}" Canvas.Left="425" Canvas.Top="81" Width="80">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding TimeModeClick}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </RadioButton>
+
+                    <Views:IORegionControl Canvas.Left="521" Canvas.Top="75" IsEnabled="{Binding ElementName=bb, Path=IsChecked}" InputText="{Binding Path=WindTimeSet,Mode=OneWayToSource}" OutputText="{Binding Path=ActWindTimeSet}" Width="125">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding WindTimeSetTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+
+                    <Views:IORegionControl Canvas.Left="131" Canvas.Top="110" InputText="{Binding Path=HaetTempSet3,Mode=OneWayToSource}" OutputText="{Binding Path=ActHaetTempSet3}" Width="125">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding HaetTempSet3TextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+
+                    <Views:IORegionControl Canvas.Left="261" Canvas.Top="110" InputText="{Binding Path=PowerSet3,Mode=OneWayToSource}" OutputText="{Binding Path=ActPowerSet3}" Width="125">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding PowerSet3TextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+
+
+                    <Label Content="实际值(Mpa)" HorizontalContentAlignment="Right" FontSize="16" Canvas.Left="10" Canvas.Top="171" Height="30" Width="125"/>
+                    <TextBlock Text="{Binding Path=Pressure,StringFormat={}{0:F2}}" TextAlignment="Left" FontSize="20" Canvas.Left="146" Canvas.Top="175" Width="79" Height="30" />
+                    <Label Content="实际值(L)" HorizontalContentAlignment="Right" FontSize="16" Canvas.Left="237" Canvas.Top="171" Height="30" Width="125"/>
+                    <TextBlock Text="{Binding Path=Folw,StringFormat={}{0:F2}}" TextAlignment="Left" FontSize="20" Canvas.Left="373" Canvas.Top="176" Width="79" Height="30" />
+                    <Label Content="实际值(KWS)" HorizontalContentAlignment="Right" FontSize="16" Canvas.Left="457" Canvas.Top="171" Height="30" Width="125"/>
+                    <TextBlock Text="{Binding Path=PowerKWS,StringFormat={}{0:F2}}" TextAlignment="Left" FontSize="20" Canvas.Left="599" Canvas.Top="175" Width="79" Height="30" />
+
+                    <Label Content="风压上限(Mpa)" HorizontalContentAlignment="Right" FontSize="16" Canvas.Left="10" Canvas.Top="210" Height="30" Width="125"/>
+                    <Label Content="风压下限" HorizontalContentAlignment="Right" FontSize="16" Canvas.Left="10" Canvas.Top="245" Height="30" Width="125"/>
+                    <Views:IORegionControl Canvas.Left="146" Canvas.Top="210" InputText="{Binding Path=PressureMax,Mode=OneWayToSource}" OutputText="{Binding Path=ActPressureMax}" Width="79">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding PressureMaxTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+                    
+                    <Views:IORegionControl Canvas.Left="146" Canvas.Top="245" InputText="{Binding Path=PressureMin,Mode=OneWayToSource}" OutputText="{Binding Path=ActPressureMin}" Width="79">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding PressureMinTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+                    
+                    <Label Content="流量上限(L)" HorizontalContentAlignment="Right" FontSize="16" Canvas.Left="243" Canvas.Top="210" Height="30" Width="125"/>
+                    <Label Content="流量下限(L)" HorizontalContentAlignment="Right" FontSize="16" Canvas.Left="243" Canvas.Top="245" Height="30" Width="125"/>
+                    <Views:IORegionControl Canvas.Left="373" Canvas.Top="210" InputText="{Binding Path=FlowMax,Mode=OneWayToSource}" OutputText="{Binding Path=ActFlowMax}" Width="79">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding FlowMaxTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+                    
+                    <Views:IORegionControl Canvas.Left="373" Canvas.Top="245" InputText="{Binding Path=FlowMin,Mode=OneWayToSource}" OutputText="{Binding Path=ActFlowMin}" Width="79">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding FlowMinTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+                    
+                    <Label Content="能量上限(KWS)" HorizontalContentAlignment="Right" FontSize="16" Canvas.Left="457" Canvas.Top="210" Height="30" Width="125"/>
+                    <Label Content="能量下限(KWS)" HorizontalContentAlignment="Right" FontSize="16" Canvas.Left="457" Canvas.Top="245" Height="30" Width="125"/>
+                    <Views:IORegionControl Canvas.Left="599" Canvas.Top="210" InputText="{Binding Path=PowerKWSMax,Mode=OneWayToSource}" OutputText="{Binding Path=ActPowerKWSMax}" Width="79">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding PowerKWSMaxTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+                    
+                    <Views:IORegionControl Canvas.Left="599" Canvas.Top="245" InputText="{Binding Path=PowerKWSMin,Mode=OneWayToSource}" OutputText="{Binding Path=ActPowerKWSMin}" Width="79">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cmd:MyEventCommand Command="{Binding PowerKWSMinTextChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Views:IORegionControl>
+
+                </Canvas>
+            </GroupBox>
+        </DockPanel>
+
+
+        <GroupBox Header="工艺参数管理" FontSize="18" Grid.Column="1" Margin="5">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--<Label Content="数据配方" FontSize="25" HorizontalAlignment="Center"/>-->
+                <TextBox Text="{Binding Path=NewNameText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  IsEnabled="{Binding NewNameTextEnable}" Grid.Row="1" FontSize="20" Height="40" materialDesign:HintAssist.Hint="请输入名称"/>
+                <ComboBox ItemsSource="{Binding ComboBoxItems}" SelectedItem="{Binding Path=ComboBoxSelectedItem, Mode=TwoWay}" SelectedIndex="{Binding Path=ComboBoxSelectedIndex,Mode=TwoWay}" Grid.Row="2" FontSize="20" IsEditable="False" BorderThickness="1" BorderBrush="Black" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="DropDownOpened">
+                            <i:InvokeCommandAction Command="{Binding RecipeCbxDropDownOpened}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="DropDownClosed">
+                            <i:InvokeCommandAction Command="{Binding RecipeCbxDropDownClosed}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding RecipeCbxSelectionChanged}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+
+                <StackPanel Orientation="Horizontal"  Grid.Row="3" HorizontalAlignment="Center">
+                    <Button Content="新建" Width="100" Height="40" Margin="5" FontSize="20"   Style="{StaticResource MaterialDesignRaisedDarkButton}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding NewButtonClick}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button Content="保存" Width="100" Height="40" Margin="5" FontSize="20"   Style="{StaticResource MaterialDesignRaisedDarkButton}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding SaveButtonClick}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button Content="装载" Width="100" Height="40" Margin="5" FontSize="20"   Style="{StaticResource MaterialDesignRaisedDarkButton}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding LoadButtonClick}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button Content="删除" Width="100" Height="40" Margin="5" FontSize="20"   Style="{StaticResource MaterialDesignRaisedDarkButton}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding DeleteButtonClick}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </StackPanel>
+
+                <ListView ItemsSource="{Binding RecipeData}" Grid.Row="4" Grid.RowSpan="4" FontSize="20">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Number}" Header="编号" Width="100"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="名称" Width="200"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Data}" Header="数值" Width="100"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </Grid>
+        </GroupBox>
+
+
+
+    </Grid>
+</UserControl>
